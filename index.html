@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문서 제목</title>
+</head>
+<body>
+
+  <h1>안녕하세요!</h1>
+  <p>이것은 HTML 기본 예제입니다.</p>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>건강상태 자가진단 퀴즈</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>건강상태 자가진단 퀴즈</h1>
+  <form id="quizForm">
+    <div class="question">
+      1. 매일 아침 식사를 챙겨 먹는다.<br>
+      <label><input type="radio" name="q1" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q1" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q1" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q1" value="3"> 항상 그렇다</label>
+    </div>
+
+    <!-- 2~10번 문항 생략 없이 계속 추가 -->
+    <!-- 복붙해서 10개 만들면 돼! 아래는 예시로 2개만 더 추가함 -->
+
+    <div class="question">
+      2. 가공식품(라면, 과자, 패스트푸드 등)을 자주 먹지 않는다.<br>
+      <label><input type="radio" name="q2" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q2" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q2" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q2" value="3"> 항상 그렇다</label>
+    </div>
+
+    <div class="question">
+      3. 하루에 물을 1.5L 이상 마신다.<br>
+      <label><input type="radio" name="q3" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q3" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q3" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q3" value="3"> 항상 그렇다</label>
+    </div>
+
+    <!-- 나머지 문항도 위와 같은 형식으로 계속 -->
+
+    <button type="button" onclick="calculateScore()">결과 보기</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateScore() {
+      const form = document.getElementById('quizForm');
+      let total = 0;
+      let unanswered = false;
+
+      for (let i = 1; i <= 3; i++) { // 문항 수만큼 반복 (10으로 바꿔도 됨)
+        const question = form['q' + i];
+        if (!question) continue;
+
+        let answered = false;
+        for (let j = 0; j < question.length; j++) {
+          if (question[j].checked) {
+            total += parseInt(question[j].value);
+            answered = true;
+            break;
+          }
+        }
+        if (!answered) unanswered = true;
+      }
+
+      const resultDiv = document.getElementById('result');
+      if (unanswered) {
+        resultDiv.textContent = "모든 문항에 답해주세요!";
+        return;
+      }
+
+      let message = '';
+      if (total >= 25) {
+        message = '건강한 상태! 지금처럼 잘 유지하자!';
+      } else if (total >= 18) {
+        message = '양호한 편이지만, 개선할 점이 있어.';
+      } else if (total >= 10) {
+        message = '주의가 필요해! 생활습관을 점검하자.';
+      } else {
+        message = '건강 위험 신호! 전문가 상담을 권장해.';
+      }
+
+      resultDiv.textContent = `총점: ${total}점 - ${message}`;
+    }
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>건강상태 자가진단 퀴즈</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      color: #d63384;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #c2185b;
+    }
+    .question {
+      background-color: #ffe6f0;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      background-color: #f06292;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background-color: #ec407a;
+    }
+    .result {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ad1457;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💗 건강상태 자가진단 퀴즈 💗</h1>
+
+  <form id="quizForm">
+    <div class="question">
+      1. 매일 아침 식사를 챙겨 먹는다.<br>
+      <label><input type="radio" name="q1" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q1" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q1" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q1" value="3"> 항상 그렇다</label>
+    </div>
+
+    <div class="question">
+      2. 가공식품을 자주 먹지 않는다.<br>
+      <label><input type="radio" name="q2" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q2" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q2" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q2" value="3"> 항상 그렇다</label>
+    </div>
+
+    <div class="question">
+      3. 하루에 물을 1.5L 이상 마신다.<br>
+      <label><input type="radio" name="q3" value="0"> 전혀 아니다</label>
+      <label><input type="radio" name="q3" value="1"> 가끔 그렇다</label>
+      <label><input type="radio" name="q3" value="2"> 자주 그렇다</label>
+      <label><input type="radio" name="q3" value="3"> 항상 그렇다</label>
+    </div>
+
+    <button type="button" onclick="calculateScore()">결과 보기</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateScore() {
+      const form = document.getElementById('quizForm');
+      let total = 0;
+      let unanswered = false;
+
+      for (let i = 1; i <= 3; i++) { // 총 문항 수로 바꾸면 됨
+        const question = form['q' + i];
+        if (!question) continue;
+
+        let answered = false;
+        for (let j = 0; j < question.length; j++) {
+          if (question[j].checked) {
+            total += parseInt(question[j].value);
+            answered = true;
+            break;
+          }
+        }
+        if (!answered) unanswered = true;
+      }
+
+      const resultDiv = document.getElementById('result');
+      if (unanswered) {
+        resultDiv.textContent = "⚠️ 모든 문항에 답해주세요!";
+        return;
+      }
+
+      let message = '';
+      if (total >= 25) {
+        message = '🌟 건강한 상태! 지금처럼 잘 유지하자!';
+      } else if (total >= 18) {
+        message = '😊 양호한 편이지만, 개선할 점이 있어.';
+      } else if (total >= 10) {
+        message = '😐 주의가 필요해! 생활습관을 점검하자.';
+      } else {
+        message = '⚠️ 건강 위험 신호! 전문가 상담을 권장해.';
+      }
+
+      resultDiv.textContent = `총점: ${total}점 - ${message}`;
+    }
+  </script>
+
+</body>
+</html>
